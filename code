@@ -1,0 +1,75 @@
+from dearpygui.core import *
+from dearpygui.simple import *
+
+
+def theme_callback(sender, data): # func for coloured themes
+    set_theme(sender)
+    
+def recursively_show(container):
+    for item in get_item_children(container):
+        if get_item_children(item):
+            show_item(item)
+            recursively_show(item)
+        else:
+            show_item(item)
+
+def webBrowser(sender, data): # web browser function that runs web browser script
+    import webBrowser
+    
+def voiceControl(sender, data):
+    import voiceControl
+    
+def playGame(sender, data): # dont add game for the final project as the file is too big to run in a short space of time 
+    pass
+
+def example1(sender, data):
+    pass
+
+def try_login(sender, data):
+    print(sender)
+    print(data)
+    if get_value('Password') == 'cheese': # first Password refering to the password item
+        delete_item('Login Window')         # after == is the actual password value
+        recursively_show('Main Window')
+    else:
+        show_item('Incorrect Password')
+
+
+def position_login_window(sender, data):
+    if does_item_exist('Login Window'):
+        main_width = get_item_width('Main Window')
+        main_height = get_item_height('Main Window')
+        login_width = get_item_width('Login Window')
+        login_height = get_item_height('Login Window')
+        set_window_pos('Login Window', int((main_width/2 - login_width/2)), int((main_height/2 - login_height/2)))
+    else:
+        # this replaces the callback with None so we dont waste resources running the login window position callback
+        set_render_callback(None)
+
+
+with window('Login Window', no_title_bar=True, autosize=True, no_resize=True):
+    add_menu_bar("MenuBar")
+    add_menu("Themes")
+    add_menu_item("Dark", callback=theme_callback)
+    add_menu_item("Classic", callback=theme_callback)
+    add_menu_item("Cherry", callback=theme_callback)
+    add_menu_item("Gold", callback=theme_callback)
+    add_menu_item("Red", callback=theme_callback)
+    end()
+    end()
+    add_input_text('Password', hint='hover me for password', password=True, on_enter=True, callback=try_login, tip='why would i tell you the password?')
+    add_button('Login', callback=try_login)
+    add_text('Incorrect Password.', color=[255, 0, 0], parent='Login Window')
+    hide_item('Incorrect Password.')
+    set_render_callback(position_login_window)
+
+with window("Main Window"):
+    add_text('You may now view my', color=[0,255,0])
+    add_image("myProjects", value="my_projects_logo.png")
+    add_button('Web Browser', callback=webBrowser) # imports custom web browser with func
+    add_button('Activate Voice Control', callback=voiceControl) # imports iron man with func
+    add_image_button("test", value="alfie.jpg" , callback=example1, width=350, height=200) # no point in adding as it prints all info to console... hopefully learn in the future how to print to
+    hide_item('Main Window', children_only=True)                                          # application area 
+    
+
+start_dearpygui(primary_window="Main Window")
