@@ -1,0 +1,34 @@
+dear pygui 
+plan
+
+WINDOW OPTION
+titlebar - yes
+move around window - yes
+close the window with cross 'X' button - yes
+scrollbar - yes
+resize - yes
+background - yes 
+menu - yes
+collapse - no
+bring to font - N/A
+
+logging function used saying how many remaining password attempts left
+
+
+try and except function for madison command 
+
+code is going to be super easy, probs going to bang this out tonight and then come up with more ideas 
+for possible apis etc to be added.. i have a few features to implement which is outside the realms of
+the gui functions so this is a best case.
+coding a test version just to get used to features.. its actually super easy which is great 
+
+going to be using render callbacks, this allows me to use a special callback which is trigged upon 
+an event, such as window closing or resizing.. im going to attempt to add a if button is clicked 3 
+times then close window and present new window.. i dont know if this will be done with making the 
+2nd window whether it will be showing or not set to False and then when the render callback is ran
+changing that value to True and closing the first window.
+
+get the scripts running and then turn into a portfolio. 
+TOMORROW WE GET IT DONE ALL DAYY
+LEARN HOW TO CONNECT A API BY DOING A STEP BY STEP RUN THROUGH OF A SPOTIFY API AS IT IS EASY TO 
+FOLLOW ALONG!!!!!
